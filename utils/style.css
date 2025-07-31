@@ -35,24 +35,29 @@ body {
 
 .welcome-text {
   position: absolute;
-  top: 20%;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
   color: #f9d3c2;
   font-family: 'Charm', cursive;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 
 .welcome-text h1 {
-  font-size: 64px;
+  font-size: 88px; /* más grande */
   margin: 0;
+  font-weight: bold;
 }
 
 .welcome-text p {
-  font-size: 24px;
+  font-size: 28px;
   margin-top: 10px;
   color: #f1c9b5;
+  font-weight: 500;
 }
+
 .welcome-screen::before {
   content: "";
   position: absolute;
