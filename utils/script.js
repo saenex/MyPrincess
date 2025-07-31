@@ -124,3 +124,53 @@ document.getElementById('presentacionModal').addEventListener('hidden.bs.modal',
     const presentacionVideo = document.getElementById('presentacionVideo');
     if (presentacionVideo) presentacionVideo.pause();
 });
+const beeGif = document.getElementById('beeGif');
+const enterDiv = document.getElementById('enterButton');
+
+// Al pasar el mouse, reinicia el gif
+enterDiv.addEventListener('mouseenter', () => {
+    beeGif.src = 'img/abeja.gif?' + new Date().getTime(); // recarga gif
+});
+
+// Clic para iniciar
+enterDiv.addEventListener('click', function () {
+    const button = this;
+    const loadingScreen = document.getElementById('loadingScreen');
+    const loadingGif = document.querySelector('.loading-gif');
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const mainContainer = document.querySelector('.main-container');
+    const bgMusic = document.getElementById('backgroundMusic');
+
+    bgMusic.volume = 0.5;
+
+    setTimeout(() => {
+        welcomeScreen.style.display = 'none';
+        loadingScreen.style.display = 'flex';
+        loadingGif.classList.add('active');
+
+        bgMusic.play().catch(() => {
+            bgMusic.muted = true;
+            bgMusic.play().then(() => bgMusic.muted = false);
+        });
+
+        setTimeout(() => {
+            loadingGif.classList.remove('active');
+            loadingGif.classList.add('finish');
+
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                mainContainer.style.display = 'flex';
+                document.body.style.filter = 'none';
+
+                const video = document.getElementById('introVideo');
+                if (video) {
+                    video.muted = false;
+                    video.play().catch(() => {
+                        video.muted = true;
+                        video.play();
+                    });
+                }
+            }, 800);
+        }, 2000);
+    }, 800);
+});

@@ -59,7 +59,7 @@ body {
 
 .welcome-text p {
   font-size: 29.2px;
-  margin-top: 43px;
+  margin-top: 4px;
   color: #f1c9b5;
   font-weight: 500;
     text-shadow:
@@ -487,4 +487,22 @@ body {
     #presentacionVideo {
     max-width: 60%;
   }
+}
+.gif-button {
+  width: 130px;
+  height: 130px;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gif-button img {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  image-rendering: auto;
+  filter: brightness(1);
+  opacity: 1;
 }
