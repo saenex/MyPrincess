@@ -33,6 +33,26 @@ body {
   overflow: hidden;
 }
 
+.welcome-text {
+  position: absolute;
+  top: 20%;
+  text-align: center;
+  color: #f9d3c2;
+  font-family: 'Charm', cursive;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.welcome-text h1 {
+  font-size: 64px;
+  margin: 0;
+}
+
+.welcome-text p {
+  font-size: 24px;
+  margin-top: 10px;
+  color: #f1c9b5;
+}
 .welcome-screen::before {
   content: "";
   position: absolute;
