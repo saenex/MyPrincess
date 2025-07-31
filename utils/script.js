@@ -7,7 +7,7 @@ document.getElementById('enterButton').addEventListener('click', function () {
     const mainContainer = document.querySelector('.main-container');
     const bgMusic = document.getElementById('backgroundMusic');
 
-    bgMusic.volume = 0.15;
+    bgMusic.volume = 0.5;
 
     button.classList.add('clicked');
 
@@ -28,6 +28,7 @@ document.getElementById('enterButton').addEventListener('click', function () {
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
                 mainContainer.style.display = 'flex';
+                document.body.style.filter = 'none';
 
                 const video = document.getElementById('introVideo');
                 if (video) {
