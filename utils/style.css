@@ -59,7 +59,7 @@ body {
 
 .welcome-text p {
   font-size: 29.2px;
-  margin-top: 4px;
+  margin-top: 43px;
   color: #f1c9b5;
   font-weight: 500;
     text-shadow:
@@ -489,8 +489,8 @@ body {
   }
 }
 .gif-button {
-  width: 130px;
-  height: 130px;
+  width: 180px;
+  height: 180px;
   cursor: pointer;
   z-index: 2;
   display: flex;
