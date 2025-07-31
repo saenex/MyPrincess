@@ -49,6 +49,7 @@ body {
   font-size: 130px; /* más grande */
   margin: 0;
   font-weight: bold;
+  line-height: 1;
 }
 
 .welcome-text p {
