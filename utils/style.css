@@ -95,6 +95,7 @@ body {
 }
 
 /* Pantalla de carga (si usas animación intermedia) */
+
 .loading-screen {
   position: fixed;
   inset: 0;
@@ -147,15 +148,31 @@ body {
 /* Texto principal después del ingreso */
 #mainContent {
   display: none;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: #f9d3c2;
   font-family: 'Charm', cursive;
   text-align: center;
-  margin-top: 30px;
   font-size: 30px;
   text-shadow:
     0 0 8px rgba(255, 255, 255, 0.3),
     1px 1px 3px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.8s ease, visibility 0.8s ease;
 }
+
+#mainContent.active {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+}
+
 
 #mainContent p {
   font-size: 21px;
