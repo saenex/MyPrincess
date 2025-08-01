@@ -138,7 +138,6 @@ enterDiv.addEventListener('click', function () {
     const loadingScreen = document.getElementById('loadingScreen');
     const loadingGif = document.querySelector('.loading-gif');
     const welcomeScreen = document.getElementById('welcomeScreen');
-    const mainContainer = document.querySelector('.main-container');
     const bgMusic = document.getElementById('backgroundMusic');
 
     bgMusic.volume = 0.5;
