@@ -2,11 +2,6 @@
   --primary: #6d3914;
   --secondary: #ab7843;
   --font-color: #4c2b08;
-  --card-width: 350px;
-  --card-height: 580px;
-  --footer-font-size: 14px;
-  --footer-padding: 15px 20px;
-  --footer-align: flex-start;
 }
 
 body {
@@ -23,6 +18,7 @@ body {
   transition: all 0.5s ease;
 }
 
+/* Pantalla de bienvenida */
 .welcome-screen {
   position: fixed;
   inset: 0;
@@ -33,6 +29,17 @@ body {
   overflow: hidden;
 }
 
+.welcome-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: -1;
+}
+
+/* Texto principal */
 .welcome-text {
   position: absolute;
   top: 10%;
@@ -46,11 +53,11 @@ body {
 }
 
 .welcome-text h1 {
-  font-size: 130px; /* más grande */
+  font-size: 130px;
   margin: 0;
   font-weight: bold;
   line-height: 1;
-   color: #f9d3c2;
+  color: #f9d3c2;
   text-shadow:
     0 0 10px rgba(255, 255, 255, 0.4),
     0 0 20px rgba(255, 220, 200, 0.3),
@@ -62,50 +69,32 @@ body {
   margin-top: 43px;
   color: #f1c9b5;
   font-weight: 500;
-    text-shadow:
+  text-shadow:
     0 0 8px rgba(255, 255, 255, 0.3),
     1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-.welcome-screen::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: inherit;
-  backdrop-filter: blur(6px);
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: -1;
-}
-
-.welcome-screen button {
-  background-color: var(--primary, #f4a8b6);
-  background-image: url('../img/logo_largo_blanco.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 200px;
-  color: var(--secondary);
-  padding: 20px 40px;
-  width: 240px;
-  height: 100px;
-  border: none;
-  border-radius: 50px;
+/* Botón GIF */
+.gif-button {
+  width: 180px;
+  height: 180px;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-  transform: scale(1);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.welcome-screen button:hover {
-  color: var(--primary);
-  background-color: var(--secondary, #f28eaa);
-  background-image: url('../img/logo_largo.svg');
-  transform: scale(1.05);
+.gif-button img {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  image-rendering: auto;
+  filter: brightness(1);
+  opacity: 1;
 }
 
-.welcome-screen button.clicked {
-  animation: buttonScale 0.8s forwards;
-}
-
+/* Pantalla de carga (si usas animación intermedia) */
 .loading-screen {
   position: fixed;
   inset: 0;
@@ -143,13 +132,6 @@ body {
 }
 
 /* Animaciones */
-@keyframes buttonScale {
-  0% { transform: scale(1); }
-  30% { transform: scale(1.2); }
-  70% { transform: scale(1.2); }
-  100% { transform: scale(0); opacity: 0; }
-}
-
 @keyframes loadingAppear {
   0% { transform: scale(0); opacity: 0; }
   50% { transform: scale(1.2); opacity: 1; }
@@ -162,347 +144,22 @@ body {
   100% { transform: scale(0); opacity: 0; }
 }
 
-.logo {
-  width: 80%;
-  height: auto;
-  margin-bottom: 2%;
-}
-
-.title {
-  color: var(--primary);
-  font-weight: 500;
-}
-
-.main-container,
-.card-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  transition: all 0.5s ease;
-}
-
-.card-container {
-  perspective: 1000px;
-  width: var(--card-width);
-  height: var(--card-height);
-  margin-bottom: 40px;
-}
-
-.card,
-.card-face {
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  background: var(--secondary);
-  position: relative;
-  transition: transform 1s;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.card {
-  transform-style: preserve-3d;
-  border-style: solid;
-}
-
-.card.flipped {
-  transform: rotateY(180deg);
-}
-
-.card-face {
-  position: absolute;
-  backface-visibility: hidden;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background-clip: padding-box;
-  border: 1px solid transparent;
-}
-
-.card-front,
-.card-back {
-  background: var(--secondary);
-  justify-content: flex-start;
-}
-
-.card-front {
-  cursor: pointer;
-}
-
-.card-back {
-  transform: rotateY(180deg);
-  padding-top: 10px;
-}
-
-.character-container {
-  width: 100%;
-  height: auto;
-  max-height: 400px;
-  overflow: hidden;
-  border-radius: 15px;
-}
-
-.character-container video {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  border-radius: 15px;
-}
-
-.video-avatar {
-  width: 100%;
-  max-width: 300px;
-  max-height: 600px;
-}
-
-.video-showreel {
-  width: 100%;
-  max-width: 600px;
-  max-height: 600px;
-}
-
-.video-presentacion {
-  width: 100%;
-  max-width: 400px;
-  max-height: 345px;
-}
-
-.back-title {
-  font-weight: 700;
+/* Texto principal después del ingreso */
+#mainContent {
+  display: none;
+  color: #f9d3c2;
+  font-family: 'Charm', cursive;
   text-align: center;
-  margin-bottom: 10px;
-  color: #5c4029;
+  margin-top: 30px;
+  font-size: 30px;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.3),
+    1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-.subtitle-container {
-  padding-top: 5%;
-}
-
-.subtitle {
-  font-size: 16px;
-  opacity: 0.9;
-  text-align: center;
-  color: var(--primary);
-}
-
-.social-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-}
-
-.social-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  border-radius: 50px;
-  border-style: solid;
-  border-width: 3px;
-  text-decoration: none;
-  color: var(--primary);
-  font-weight: 600;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  z-index: 1;
-}
-
-.social-btn i,
-.social-btn p {
-  margin-right: 10px;
-  font-size: 20px;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
-  color: var(--primary);
-  margin: 0;
-}
-
-.social-btn p {
-  font-size: 14px;
-  font-weight: 600;
-  margin-left: 1%;
-}
-
-.social-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: var(--primary);
-  transition: all 0.3s ease;
-  z-index: 0;
-}
-
-.social-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.social-btn:hover i,
-.social-btn:hover p {
-  color: var(--secondary);
-}
-
-.social-btn:hover::before {
-  left: 0;
-}
-
-.footer {
-  width: 100%;
-  padding: var(--footer-padding);
-  text-align: left;
-  background: rgba(109, 57, 20, 0.406);
-  backdrop-filter: blur(5px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: var(--footer-font-size);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: var(--footer-align);
-  align-items: center;
-}
-
-.footer p {
-  margin: 0;
-  width: 100%;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--secondary);
-}
-
-.no-flip {
-  pointer-events: auto;
-}
-
-@media (max-width: 576px) {
-  :root {
-    --card-width: 90%;
-    --card-height: 580px;
-    --footer-font-size: 12px;
-    --footer-padding: 10px 15px;
-    --footer-align: center;
-  }
-
-  .character-container {
-    max-height: auto;
-  }
-
-.video-presentacion {
-  width: 100%;
-  max-width: 400px;
-  max-height: 270px;
-}
-
-  .title {
-    font-size: 14px;
-    text-align: center;
-  }
-
-  .subtitle {
-    font-size: 20px;
-  }
-
-  .footer p {
-    max-width: 90%;
-  }
-}
-
-.video-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.video-buttons .btn {
-  font-family: "Roboto Condensed", sans-serif;
-  border-radius: 30px;
-  padding: 8px 18px;
-  font-weight: 600;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  background-color: transparent;
-  transition: all 0.3s ease;
-  font-size: 14px;
-}
-
-.video-buttons .btn:hover {
-  background-color: var(--primary);
-  color: white;
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.video-buttons .btn:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.2rem rgba(109, 57, 20, 0.25);
-}
-
-/* ===== MODAL Show Reel ===== */
-.modal-content {
-  background-color: transparent;
-  border: none;
-  padding-bottom: 5%;
-}
-
-.modal-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#showReelVideo{
-  max-width: 100%;
-  max-height: 80vh;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-#presentacionVideo {
-  max-width: 38%;
-  max-height: 80vh;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.modal-backdrop.show {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-@media (max-width: 576px) {
-    #presentacionVideo {
-    max-width: 60%;
-  }
-}
-.gif-button {
-  width: 180px;
-  height: 180px;
-  cursor: pointer;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.gif-button img {
-  width: 100%;
-  height: auto;
-  pointer-events: none;
-  image-rendering: auto;
-  filter: brightness(1);
-  opacity: 1;
+#mainContent p {
+  font-size: 21px;
+  max-width: 80%;
+  margin: 0 auto;
+  color: #ffe3d4;
 }
