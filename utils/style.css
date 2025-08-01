@@ -18,7 +18,10 @@ body {
   transition: all 0.5s ease;
 }
 
+
+
 /* Pantalla de bienvenida */
+
 .welcome-screen {
   position: fixed;
   inset: 0;
@@ -40,6 +43,7 @@ body {
 }
 
 /* Texto principal */
+
 .welcome-text {
   position: absolute;
   top: 10%;
@@ -74,6 +78,8 @@ body {
     1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
+
+
 /* Botón GIF */
 .gif-button {
   width: 180px;
@@ -93,6 +99,8 @@ body {
   filter: brightness(1);
   opacity: 1;
 }
+
+
 
 /* Pantalla de carga (si usas animación intermedia) */
 
@@ -132,6 +140,8 @@ body {
   animation: loadingDisappear 0.8s forwards;
 }
 
+
+
 /* Animaciones */
 @keyframes loadingAppear {
   0% { transform: scale(0); opacity: 0; }
@@ -145,17 +155,21 @@ body {
   100% { transform: scale(0); opacity: 0; }
 }
 
+
+
 /* Texto principal después del ingreso */
 #mainContent {
   display: none;
   visibility: hidden;
   opacity: 0;
-  position: absolute;
   z-index: 0;
   width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 30px 20px;
+  box-sizing: border-box;
   color: #f9d3c2;
   font-family: 'Charm', cursive;
   text-align: center;
@@ -164,6 +178,9 @@ body {
     0 0 8px rgba(255, 255, 255, 0.3),
     1px 1px 3px rgba(0, 0, 0, 0.4);
   transition: opacity 0.8s ease, visibility 0.8s ease;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 #mainContent.active {
@@ -172,6 +189,7 @@ body {
   opacity: 1;
   z-index: 10;
 }
+
 
 
 #mainContent p {
