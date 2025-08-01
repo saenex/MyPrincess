@@ -167,7 +167,7 @@ body {
 }
 
 #mainContent.active {
-  display: block;
+  display: flex;
   visibility: visible;
   opacity: 1;
   z-index: 10;
