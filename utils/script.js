@@ -159,7 +159,7 @@ enterDiv.addEventListener('click', function () {
 
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
-                mainContainer.style.display = 'flex';
+                document.getElementById('mainContent').classList.add('active');
                 document.body.style.filter = 'none';
 
                 const video = document.getElementById('introVideo');
