@@ -4,7 +4,8 @@ document.getElementById('enterButton').addEventListener('click', function () {
     const loadingScreen = document.getElementById('loadingScreen');
     const loadingGif = document.querySelector('.loading-gif');
     const welcomeScreen = document.getElementById('welcomeScreen');
-    const mainContainer = document.querySelector('.main-container');
+    const mainContainer = document.getElementById('main-container');
+
     const bgMusic = document.getElementById('backgroundMusic');
 
     bgMusic.volume = 0.5;
@@ -27,7 +28,7 @@ document.getElementById('enterButton').addEventListener('click', function () {
 
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
-                mainContainer.style.display = 'flex';
+                 mainContainer.classList.add('active');
                 document.body.style.filter = 'none';
 
                 const video = document.getElementById('introVideo');
@@ -158,7 +159,7 @@ enterDiv.addEventListener('click', function () {
 
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
-                document.getElementById('mainContent').classList.add('active');
+                document.getElementById('main-container').classList.add('active');
                 document.body.style.filter = 'none';
 
                 const video = document.getElementById('introVideo');
