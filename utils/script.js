@@ -7,11 +7,158 @@ document.getElementById('enterButton').addEventListener('click', function () {
     const mainContainer = document.getElementById('main-container');
 
     const bgMusic = document.getElementById('backgroundMusic');
+    const slider = document.querySelector(".slider");
+    const slides = document.querySelectorAll(".contador-box");
+    const dots = document.querySelectorAll(".dot");
+    let currentSlide = 0;
+    let isDragging = false;
+    let startX = 0;
 
     bgMusic.volume = 0.5;
 
     button.classList.add('clicked');
 
+    
+    // FECHA DE INICIO
+  const fechaInicio = new Date("2024-11-21T00:00:00");
+
+  // FUNCIONES DE TIEMPO
+  function actualizarContador() {
+    const ahora = new Date();
+    const tiempo = ahora - fechaInicio;
+
+    // TOTAL EN SEGUNDOS
+    const totalSegundos = Math.floor(tiempo / 1000);
+    const segundos = totalSegundos % 60;
+    const totalMinutos = Math.floor(totalSegundos / 60);
+    const minutos = totalMinutos % 60;
+    const totalHoras = Math.floor(totalMinutos / 60);
+    const horas = totalHoras % 24;
+    const totalDias = Math.floor(totalHoras / 24);
+
+    // Años, meses, días para vista 1
+    let anios = 0;
+    let meses = 0;
+    let dias = 0;
+    
+    const fechaActual = new Date(ahora);
+    const fechaTemp = new Date(fechaInicio);
+    
+    // Calcular años
+    anios = fechaActual.getFullYear() - fechaTemp.getFullYear();
+    
+    // Calcular meses
+    meses = fechaActual.getMonth() - fechaTemp.getMonth();
+    if (meses < 0) {
+      anios--;
+      meses += 12;
+    }
+    
+    // Calcular días
+    dias = fechaActual.getDate() - fechaTemp.getDate();
+    if (dias < 0) {
+      meses--;
+      if (meses < 0) {
+        anios--;
+        meses += 12;
+      }
+      const ultimoDiaMesAnterior = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), 0).getDate();
+      dias += ultimoDiaMesAnterior;
+    }
+
+    document.getElementById("anios2").textContent = anios;
+    document.getElementById("meses2").textContent = meses;
+    document.getElementById("diasSolo2").textContent = dias;
+    document.getElementById("horas2").textContent = horas;
+    document.getElementById("minutosSolo2").textContent = minutos;
+
+    document.getElementById("totalDias").textContent = totalDias;
+    document.getElementById("horas").textContent = horas;
+    document.getElementById("minutos").textContent = minutos;
+    document.getElementById("segundos").textContent = segundos;
+  }
+
+  setInterval(actualizarContador, 1000);
+  actualizarContador();
+
+  // ENTRAR Y MOSTRAR CONTENIDO
+  enterButton.addEventListener("click", () => {
+    welcomeScreen.style.display = "none";
+    mainContent.style.display = "flex";
+    backgroundMusic.play();
+  });
+
+  function updateSlider() {
+    slides.forEach((slide, index) => {
+      slide.classList.remove('active', 'prev');
+      
+      if (index === currentSlide) {
+        slide.classList.add('active');
+      } else if (index < currentSlide) {
+        slide.classList.add('prev');
+      }
+      // Los slides que están después del actual quedan en su posición por defecto (derecha)
+    });
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentSlide);
+    });
+  }
+
+  // DESLIZAR MANUAL CON MOUSE / TOUCH
+  slider.addEventListener("mousedown", startDrag);
+  slider.addEventListener("touchstart", startDrag, { passive: false });
+
+  function startDrag(e) {
+    e.preventDefault();
+    isDragging = true;
+    startX = e.type === "mousedown" ? e.pageX : e.touches[0].clientX;
+
+    document.addEventListener("mousemove", drag);
+    document.addEventListener("touchmove", drag, { passive: false });
+    document.addEventListener("mouseup", endDrag);
+    document.addEventListener("touchend", endDrag);
+  }
+
+  function drag(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+  }
+
+  function endDrag(e) {
+    isDragging = false;
+    const x = e.type === "mouseup" ? e.pageX : e.changedTouches[0].clientX;
+    const deltaX = x - startX;
+
+    // Si se desliza más de 50px, cambiar de slide
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX < 0 && currentSlide < slides.length - 1) {
+        // Deslizar hacia la izquierda - siguiente slide
+        currentSlide++;
+      } else if (deltaX > 0 && currentSlide > 0) {
+        // Deslizar hacia la derecha - slide anterior
+        currentSlide--;
+      }
+    }
+
+    updateSlider();
+    document.removeEventListener("mousemove", drag);
+    document.removeEventListener("touchmove", drag);
+    document.removeEventListener("mouseup", endDrag);
+    document.removeEventListener("touchend", endDrag);
+  }
+
+  // Click en dots para navegar
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      currentSlide = index;
+      updateSlider();
+    });
+  });
+
+  // INICIAR CON PRIMERA VISTA
+  updateSlider();
+  
     setTimeout(() => {
         welcomeScreen.style.display = 'none';
         loadingScreen.style.display = 'flex';
@@ -44,14 +191,7 @@ document.getElementById('enterButton').addEventListener('click', function () {
     }, 800);
 });
 
-// Voltear la tarjeta excepto si es un botón, showreel o presentación
-document.getElementById('interactiveCard').addEventListener('click', function (e) {
-    if (!e.target.closest('.btn-cambiar-video') && 
-        !e.target.closest('#showReelBtn') && 
-        !e.target.closest('#presentacionBtn')) {
-        this.classList.toggle('flipped');
-    }
-});
+
 
 // Redimensionamiento
 window.addEventListener('resize', () => {
@@ -59,32 +199,7 @@ window.addEventListener('resize', () => {
     setTimeout(() => document.body.style.overflow = '', 300);
 });
 
-// Precargar video
-window.addEventListener('DOMContentLoaded', () => {
-    const video = document.getElementById('introVideo');
-    if (video) video.load();
-});
 
-// Cambiar video en la tarjeta
-function cambiarVideo(ruta) {
-    const video = document.getElementById("introVideo");
-    const source = video.querySelector("source");
-
-    video.classList.remove("video-avatar", "video-showreel", "video-presentacion");
-
-    if (ruta.includes('video.mp4')) {
-        video.classList.add('video-avatar');
-    } else if (ruta.includes('video2.mp4')) {
-        video.classList.add('video-showreel');
-    } else if (ruta.includes('video3.mp4')) {
-        video.classList.add('video-presentacion');
-    }
-
-    video.pause();
-    source.setAttribute("src", ruta);
-    video.load();
-    video.play();
-}
 
 // Mostrar Show Reel en modal
 document.getElementById('showReelBtn').addEventListener('click', function (e) {

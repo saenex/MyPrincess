@@ -29,9 +29,9 @@
     <div class="welcome-text">
       <h1>Sofía & Miguel</h1>
       <p>Para mi abejita miope</p>
-    </div>
-    <div id="enterButton" class="gif-button" role="button">
+          <div id="enterButton" class="gif-button position-absolute top-100 start-50 translate-middle" role="button">
       <img id="beeGif" src="img/abeja.gif" alt="Entrar" />
+    </div>
     </div>
   </div>
 
@@ -52,7 +52,60 @@
       Porque todo este tiempo, ha sido el mejor tiempo de mi vida.
     </p>
   </div>
+  
+      <!-- Slider de contadores -->
+    <div class="slider-wrapper">
+      <div class="slider" id="contadorSlider">
+        <!-- Vista 1: Días, horas, minutos, segundos -->
+        <div class="contador-box active" id="slide1">
+          <p class="contador-titulo">TIEMPO JUNTOS</p>
+          <div class="contador-grid">
+            <div><span id="totalDias">0</span>
+              <p>días</p>
+            </div>
+            <div><span id="horas">0</span>
+              <p>horas</p>
+            </div>
+            <div><span id="minutos">0</span>
+              <p>minutos</p>
+            </div>
+            <div><span id="segundos">0</span>
+              <p>segundos</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vista 2: Años, meses, días, horas, minutos -->
+        <div class="contador-box" id="slide2">
+          <p class="contador-titulo">TIEMPO JUNTOS</p>
+          <div class="contador-grid">
+            <div><span id="anios2">0</span>
+              <p>años</p>
+            </div>
+            <div><span id="meses2">0</span>
+              <p>meses</p>
+            </div>
+            <div><span id="diasSolo2">0</span>
+              <p>días</p>
+            </div>
+            <div><span id="horas2">0</span>
+              <p>horas</p>
+            </div>
+            <div><span id="minutosSolo2">0</span>
+              <p>minutos</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dots">
+        <span class="dot active" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+      </div>
+    </div>
+  </div>
 </div>
+
+
 
   <!-- Contenedor de audio -->
   <div style="display: none;">
